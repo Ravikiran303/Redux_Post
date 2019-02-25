@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
 import {StyleSheet, TextInput, View,TouchableHighlight,Text} from 'react-native';
 import {connect} from 'react-redux';
-import {addTodo} from '../actions';
+
 
 
 class AddTodo extends Component {
-    state = {
-        text:''
+  constructor(){
+    super();
+    this.state = {
+      text:''
     }
+  }
+    
     addTodo = (text) => {
-        this.props.dispatch(addTodo(text))
+        this.props.dispatch({type:'ADD_TODO',text})
         this.setState({text:''})
     }
   render() {
@@ -17,7 +21,7 @@ class AddTodo extends Component {
         <View style={styles.main}>
         <TextInput style={styles.itemInput} 
         placeholder="Enter your text" 
-        onChange = {(text) => this.setState(text)}
+        onChangeText = {(text) => this.setState({text})}
         value={this.state.text}/>
         <TouchableHighlight
           style={styles.button}
@@ -46,7 +50,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'white',
         borderRadius: 8,
-        color: 'white'
+        color: 'black'
       },
       buttonText: {
         fontSize: 18,
